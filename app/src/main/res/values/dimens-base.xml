@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="dialog_duration">300</integer>
+    <dimen name="common_font">@dimen/y36</dimen>
+    <dimen name="divide_line">1px</dimen>
+</resources>

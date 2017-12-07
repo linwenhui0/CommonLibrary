@@ -1,0 +1,83 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
+    dataBinding {
+        enabled true
+    }
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api 'android.arch.lifecycle:runtime:1.0.3'
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
+    api 'android.arch.lifecycle:common-java8:1.0.0'
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
+    api 'com.android.support:support-annotations:27.0.2'
+    api 'com.android.support:appcompat-v7:27.0.2'
+    api 'com.android.support:design:27.0.2'
+    api 'com.android.support:support-v4:27.0.2'
+    api 'com.android.support:gridlayout-v7:27.0.2'
+    api 'com.android.support:cardview-v7:27.0.2'
+    api 'com.j256.ormlite:ormlite-core:5.0'
+    api 'com.j256.ormlite:ormlite-android:5.0'
+
+    //本地代码库
+    compile 'com.github.linwenhui0:UtilLibary:0.0.2'
+    compile 'com.github.linwenhui0:ImageLibrary:0.0.1'
+    compile 'com.github.linwenhui0:AdapterLibrary:V0.0.1'
+    compile 'com.github.linwenhui0:NetLibrary:0.0.7'
+    compile 'com.github.linwenhui0:CommonAction:0.0.2'
+    compile 'com.github.linwenhui0:TcpLibaray:0.0.1'
+    compile 'com.github.linwenhui0:WidgetLibrary:0.0.1'
+}
+
+def getRepositoryUsername() {
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+}
+def getRepositoryPassword() {
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+}
+uploadArchives{
+    configuration = configurations.archives
+    repositories{
+        mavenDeployer{
+            pom.groupId = GROUP
+            pom.artifactId = POM_ARTIFACT_ID
+            pom.version = VERSION_NAME
+            repository(url: RELEASE_REPOSITORY_URL) {
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+            }
+            snapshotRepository(url: SNAPSHOT_REPOSITORY_URL) {
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+            }
+
+
+        }
+    }
+}
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+artifacts {
+    archives androidSourcesJar
+//        archives androidJavadocsJar
+}
+

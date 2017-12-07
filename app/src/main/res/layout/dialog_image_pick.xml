@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class=".ImagePick">
+        <import type="android.view.View.OnClickListener"/>
+        <variable
+            name="cameraOnClickListener"
+            type="OnClickListener"/>
+        <variable
+            name="phoneOnClickListener"
+            type="OnClickListener"/>
+        <variable
+            name="dismissOnClickListener"
+            type="OnClickListener"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pick_dialog_bg"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_take_camera"
+            style="@style/ImagePickStyle.Btn"
+            android:onClick="@{cameraOnClickListener.onClick}"
+            android:text="@string/take_camera" />
+
+        <View
+            style="@style/DivideLineStyle"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10" />
+
+        <Button
+            android:id="@+id/btn_local_photo"
+            style="@style/ImagePickStyle.Btn"
+            android:onClick="@{phoneOnClickListener.onClick}"
+            android:text="@string/local_photo" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/ImagePickStyle.Btn"
+            android:layout_marginTop="@dimen/y30"
+            android:onClick="@{dismissOnClickListener.onClick}"
+            android:text="@string/cancel" />
+
+    </LinearLayout>
+</layout>
