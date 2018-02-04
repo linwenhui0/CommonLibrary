@@ -39,7 +39,7 @@ dependencies {
     api 'com.j256.ormlite:ormlite-android:5.0'
 
     //本地代码库
-    compile 'com.github.linwenhui0:UtilLibary:0.0.2'
+    compile 'com.github.linwenhui0:UtilLibary:0.0.6'
     compile 'com.github.linwenhui0:ImageLibrary:0.0.1'
     compile 'com.github.linwenhui0:AdapterLibrary:V0.0.1'
     compile 'com.github.linwenhui0:NetLibrary:0.0.7'

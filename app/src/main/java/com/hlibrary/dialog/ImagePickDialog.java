@@ -53,7 +53,7 @@ public class ImagePickDialog extends BaseDialog<ImagePick> implements PhotoListe
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Logger.i(TAG," == onActivityResult == sel = " + sel);
+        Logger.getInstance().i(TAG, " == onActivityResult == sel = " + sel);
         if (sel == 0) {
             try {
                 cameraImageAction.onActivityResult(requestCode, resultCode, data);
