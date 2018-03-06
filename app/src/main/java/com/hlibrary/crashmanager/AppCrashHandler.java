@@ -36,7 +36,7 @@ public class AppCrashHandler implements UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
 
-        Logger.e(TAG, ex, "程序出错啦。。。。。。。。。。");
+        Logger.getInstance().e(TAG, ex, "程序出错啦。。。。。。。。。。");
 
         if (!handleException(ex) && mDefaultHandler != null) {
             mDefaultHandler.uncaughtException(thread, ex);
@@ -67,7 +67,7 @@ public class AppCrashHandler implements UncaughtExceptionHandler {
                     + stackTrace[i].getLineNumber() + "\n");
         }
         errorMsg.append("\n");
-        Logger.i(errorMsg.toString());
+        Logger.getInstance().i(errorMsg.toString());
 
 
         android.os.Process.killProcess(android.os.Process.myPid());

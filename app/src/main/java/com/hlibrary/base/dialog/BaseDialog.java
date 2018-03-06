@@ -25,6 +25,8 @@ public abstract class BaseDialog<T extends ViewDataBinding> extends Dialog {
 
     public BaseDialog(Context context) {
         this(context, R.style.DialogStyle);
+
+
     }
 
     public BaseDialog(Context context, @StyleRes int theme) {
@@ -48,7 +50,7 @@ public abstract class BaseDialog<T extends ViewDataBinding> extends Dialog {
     @Override
     protected void onStart() {
         super.onStart();
-        if (mDialogHanler!=null)
+        if (mDialogHanler != null)
             mDialogHanler = CommonHandler.obtain(getContext());
         mDialogHanler.register(this);
     }

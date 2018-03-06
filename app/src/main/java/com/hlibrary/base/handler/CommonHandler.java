@@ -53,7 +53,7 @@ public class CommonHandler implements HandlerInterface<CommonHandler> {
     }
 
     public String getTag() {
-        Logger.i(TAG, " " + TAG + " " + ExtraTag);
+        Logger.getInstance().i(TAG, " " + TAG + " " + ExtraTag);
         if (!"".equals(ExtraTag)) {
             return ExtraTag;
         }

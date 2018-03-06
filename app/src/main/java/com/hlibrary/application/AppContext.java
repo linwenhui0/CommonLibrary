@@ -44,8 +44,8 @@ public abstract class AppContext extends Application {
         super.onCreate();
         init();
         ImageUtil.initImageLoader(this);
-        Logger.setPackageName(this);
-        Logger.setDEBUG(isLogDebug(), isLogFileDebug());
+        Logger.getInstance().setPackageName(this);
+        Logger.getInstance().setDEBUG(isLogDebug(), isLogFileDebug());
     }
 
     @Override
