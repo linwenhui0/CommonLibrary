@@ -15,7 +15,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.hlibrary.base.handler.ActivityHandler;
 import com.hlibrary.db.DatabaseHelper;
@@ -66,22 +65,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         setStatusBarColorResId(getStatusBarColorResId());
         mViewDataBind = DataBindingUtil.setContentView(this, getLayoutRes());
         openDB();
-    }
-
-    @Deprecated
-    @Override
-    public void setContentView(View view) {
-    }
-
-    @Deprecated
-    @Override
-    public void setContentView(int layoutResID) {
-    }
-
-    @Deprecated
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-
     }
 
     @Override
