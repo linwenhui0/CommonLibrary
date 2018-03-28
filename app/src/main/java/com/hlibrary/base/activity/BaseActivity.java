@@ -16,14 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.hlibrary.application.AppContext;
 import com.hlibrary.base.handler.ActivityHandler;
 import com.hlibrary.db.DatabaseHelper;
 import com.hlibrary.entity.MessageEvent;
 import com.hlibrary.util.ToastUtil;
-import com.hlibrary.utils.BinderUtil;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
@@ -68,29 +65,23 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         mActivityHanler.pushActivity(this);
         setStatusBarColorResId(getStatusBarColorResId());
         mViewDataBind = DataBindingUtil.setContentView(this, getLayoutRes());
-//        View decorView = getWindow().getDecorView();
-//        ViewGroup contentView = (ViewGroup) decorView.findViewById(android.R.id.content);
-//        fit(contentView, isAutoFitView());
         openDB();
     }
 
-    protected boolean isAutoFitView() {
-        return AppContext.instance.isAutoFitView();
+    @Deprecated
+    @Override
+    public void setContentView(View view) {
     }
 
-    private void fit(ViewGroup contentView, boolean autoFit) {
-        BinderUtil.fitView(contentView, autoFit);
-        final int count = contentView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            View v = contentView.getChildAt(i);
-            if (v instanceof ViewGroup) {
-                fit((ViewGroup) v, autoFit);
-            } else if (v instanceof TextView) {
-                BinderUtil.fitTextView((TextView) v, autoFit);
-            } else {
-                BinderUtil.fitView(v, autoFit);
-            }
-        }
+    @Deprecated
+    @Override
+    public void setContentView(int layoutResID) {
+    }
+
+    @Deprecated
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+
     }
 
     @Override

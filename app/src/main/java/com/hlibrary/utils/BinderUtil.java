@@ -12,9 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
@@ -26,7 +24,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hlibrary.application.AppContext;
 import com.hlibrary.widget.listener.AfterTextChanged;
 
 import java.lang.reflect.Method;
@@ -37,53 +34,6 @@ import java.lang.reflect.Method;
 public final class BinderUtil {
 
     private BinderUtil() {
-    }
-
-    public static boolean fitView(View v, boolean fit) {
-        if (!fit)
-            return false;
-
-        int _paddingTop = (int) (v.getPaddingTop() * AppContext.ITEM_HEIGHT);
-        int _paadingBottom = (int) (v.getPaddingBottom() * AppContext.ITEM_HEIGHT);
-        int _paddingLeft = (int) (v.getPaddingLeft() * AppContext.ITEM_WIDTH);
-        int _paddingRight = (int) (v.getPaddingRight() * AppContext.ITEM_WIDTH);
-        v.setPadding(_paddingLeft, _paddingTop, _paddingRight, _paadingBottom);
-
-        ViewGroup.LayoutParams params = v.getLayoutParams();
-        if (params instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) params;
-            lp.leftMargin = (int) (lp.leftMargin * AppContext.ITEM_WIDTH);
-            lp.rightMargin = (int) (lp.rightMargin * AppContext.ITEM_WIDTH);
-            lp.topMargin = (int) (lp.topMargin * AppContext.ITEM_HEIGHT);
-            lp.bottomMargin = (int) (lp.bottomMargin * AppContext.ITEM_HEIGHT);
-            if (lp.width > 0) {
-                lp.width = (int) (lp.width * AppContext.ITEM_WIDTH);
-            }
-            if (lp.height > 0) {
-                lp.height = (int) (lp.height * AppContext.ITEM_HEIGHT);
-            }
-        } else {
-            if (params.width > 0) {
-                params.width = (int) (params.width * AppContext.ITEM_WIDTH);
-            }
-            if (params.height > 0) {
-                params.height = (int) (params.height * AppContext.ITEM_HEIGHT);
-            }
-        }
-
-        v.requestLayout();
-        return true;
-    }
-
-    public static boolean fitTextView(TextView tv, boolean fit) {
-        if (!fitView(tv, fit)) {
-            return false;
-        }
-
-        float textSize = (float) (tv.getTextSize() * AppContext.ITEM_HEIGHT);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tv.setCompoundDrawablePadding((int) (tv.getCompoundDrawablePadding() * AppContext.ITEM_HEIGHT));
-        return true;
     }
 
     @BindingConversion

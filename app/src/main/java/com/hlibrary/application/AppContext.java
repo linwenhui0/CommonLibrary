@@ -24,19 +24,10 @@ public abstract class AppContext extends Application {
     private ActivityManager activityManager;
 
     public int screenWidth, screenHeight;
-    public static double ITEM_WIDTH, ITEM_HEIGHT;//1dp代表的px
 
     public abstract boolean isLogDebug();
 
     public abstract boolean isLogFileDebug();
-
-    public abstract int getStaticWidth();
-
-    public abstract int getStaticHeight();
-
-    public boolean isAutoFitView() {
-        return true;
-    }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
@@ -64,8 +55,6 @@ public abstract class AppContext extends Application {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
-        ITEM_HEIGHT = 1.0 * screenHeight / getStaticHeight();
-        ITEM_WIDTH = 1.0 * screenWidth / getStaticWidth();
 
     }
 
