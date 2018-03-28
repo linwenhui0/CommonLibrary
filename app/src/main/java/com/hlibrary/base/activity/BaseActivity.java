@@ -68,7 +68,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     }
 
     @Override
-    protected final void onResume() {
+    protected void onResume() {
         super.onResume();
         mActivityHanler.register(this);
     }
