@@ -14,6 +14,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
  */
 public class AppCrashHandler implements UncaughtExceptionHandler {
     public static final String TAG = "CrashHandler";
+    private static final String RETURN = "\r\n";
     private static AppCrashHandler instance;
     private UncaughtExceptionHandler mDefaultHandler;
 
@@ -61,12 +62,11 @@ public class AppCrashHandler implements UncaughtExceptionHandler {
         StringBuffer errorMsg = new StringBuffer();
         errorMsg.append(ex.getMessage() + "\n");
         for (int i = 0; i < stackTrace.length; i++) {
-            errorMsg.append(stackTrace[i].getFileName() + " class:"
-                    + stackTrace[i].getClassName() + " method:"
-                    + stackTrace[i].getMethodName() + " line:"
-                    + stackTrace[i].getLineNumber() + "\n");
+            errorMsg.append("文件名：").append(stackTrace[i].getFileName()).append(RETURN)
+                    .append("类名：").append(stackTrace[i].getClassName())
+                    .append(".").append(stackTrace[i].getMethodName()).append(RETURN)
+                    .append("代码行数：").append(stackTrace[i].getLineNumber()).append(RETURN);
         }
-        errorMsg.append("\n");
         Logger.getInstance().i(errorMsg.toString());
 
 

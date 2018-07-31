@@ -16,18 +16,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.hlibrary.base.handler.ActivityHandler;
-import com.hlibrary.db.DatabaseHelper;
-import com.hlibrary.entity.MessageEvent;
+import com.hlibrary.base.CommonHandler;
+import com.hlibrary.util.DensityUtil;
 import com.hlibrary.util.ToastUtil;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+
+import java.lang.reflect.Field;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
-
-    public ActivityHandler mActivityHanler;
-    private DatabaseHelper databaseHelper = null;
+    public CommonHandler mActivityHanler;
     protected T mViewDataBind;
+    private static int staticPixels = 0;
+
+    public boolean useDataBinding() {
+        return true;
+    }
 
     public abstract int getLayoutRes();
 
@@ -60,23 +63,30 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityHanler = ActivityHandler.obtain(this);
+        if (staticPixels == 0) {
+            try {
+                Class cls = Class.forName(getPackageName() + ".BuildConfig");
+                try {
+                    Field field = cls.getField("STATIC_PIXELS");
+                    staticPixels = (int) field.get(null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    staticPixels = 360;
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        DensityUtil.setCustomDensity(this, getApplication(), staticPixels);
+        mActivityHanler = CommonHandler.Companion.obtain(this);
         mActivityHanler.pushActivity(this);
         setStatusBarColorResId(getStatusBarColorResId());
-        mViewDataBind = DataBindingUtil.setContentView(this, getLayoutRes());
-        openDB();
-    }
+        if (useDataBinding()) {
+            mViewDataBind = DataBindingUtil.setContentView(this, getLayoutRes());
+        } else {
+            setContentView(getLayoutRes());
+        }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mActivityHanler.register(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mActivityHanler.unregister(this);
     }
 
     @Override
@@ -84,34 +94,9 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         mActivityHanler.pullActivity(this);
         mActivityHanler.release();
         mActivityHanler = null;
-        closeDB();
         super.onDestroy();
     }
 
-    protected Class<? extends DatabaseHelper> getDatabaseClass() {
-        return null;
-    }
-
-    private final void openDB() {
-        if (getDatabaseClass() == null)
-            return;
-
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(this, getDatabaseClass());
-        }
-
-    }
-
-    private final void closeDB() {
-        if (getDatabaseClass() == null)
-            return;
-
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
-
-    }
 
     public final void setupToolbar(Toolbar toolbar) {
         toolbar.setTitle("");
@@ -140,16 +125,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 
     public void dismissProgress() {
         mActivityHanler.dismissProgress();
-    }
-
-    protected boolean parseMessageEvent(MessageEvent msgEvent, int type) {
-        if (msgEvent != null && msgEvent.getType() == type)
-            return true;
-        return false;
-    }
-
-    protected boolean parseMessageEvent(@NonNull MessageEvent msgEvent, @NonNull String key) {
-        return key.equals(msgEvent.getKey());
     }
 
     public int getDimensionPixelSize(@DimenRes int resId) {

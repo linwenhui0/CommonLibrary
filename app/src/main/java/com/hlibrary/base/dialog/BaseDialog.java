@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hlibrary.R;
-import com.hlibrary.base.handler.CommonHandler;
+import com.hlibrary.base.CommonHandler;
 
 
 public abstract class BaseDialog<T extends ViewDataBinding> extends Dialog {
@@ -23,10 +23,12 @@ public abstract class BaseDialog<T extends ViewDataBinding> extends Dialog {
     private FrameLayout parent;
     protected T mDataBinding;
 
+    protected boolean useDataBinding() {
+        return true;
+    }
+
     public BaseDialog(Context context) {
         this(context, R.style.DialogStyle);
-
-
     }
 
     public BaseDialog(Context context, @StyleRes int theme) {
@@ -35,44 +37,56 @@ public abstract class BaseDialog<T extends ViewDataBinding> extends Dialog {
         parent = new FrameLayout(context);
     }
 
-    @Override
-    public void setContentView(@LayoutRes int layoutResID) {
-        mDataBinding = DataBindingUtil.inflate(inflater, layoutResID, parent, false);
-        super.setContentView(mDataBinding.getRoot());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDialogHanler = CommonHandler.obtain(getContext());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         if (mDialogHanler != null)
-            mDialogHanler = CommonHandler.obtain(getContext());
-        mDialogHanler.register(this);
-    }
-
-    @Override
-    public void setContentView(View view) {
-        mDataBinding = DataBindingUtil.bind(view);
-        super.setContentView(mDataBinding.getRoot());
-    }
-
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        mDataBinding = DataBindingUtil.bind(view);
-        super.setContentView(mDataBinding.getRoot(), params);
+            mDialogHanler = CommonHandler.Companion.obtain(getContext());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mDialogHanler.unregister(this);
         mDialogHanler.release();
+        mDialogHanler = null;
     }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        if (useDataBinding()) {
+            mDataBinding = DataBindingUtil.inflate(inflater, layoutResID, parent, false);
+            super.setContentView(mDataBinding.getRoot());
+        } else {
+            super.setContentView(layoutResID);
+        }
+    }
+
+    @Override
+    public void setContentView(View view) {
+        if (useDataBinding()) {
+            mDataBinding = DataBindingUtil.bind(view);
+            super.setContentView(mDataBinding.getRoot());
+        } else {
+            super.setContentView(view);
+        }
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        if (useDataBinding()) {
+            mDataBinding = DataBindingUtil.bind(view);
+            super.setContentView(mDataBinding.getRoot(), params);
+        } else {
+            super.setContentView(view, params);
+        }
+    }
+
 
     @Override
     public void show() {

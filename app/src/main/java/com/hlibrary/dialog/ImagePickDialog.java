@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.hlibrary.ImagePick;
 import com.hlibrary.R;
 import com.hlibrary.action.Image.CameraImageAction;
 import com.hlibrary.action.Image.LocalImageAction;
@@ -21,7 +20,7 @@ import com.hlibrary.util.Logger;
 /**
  * Created by linwenhui on 2015/11/24.
  */
-public class ImagePickDialog extends BaseDialog<ImagePick> implements PhotoListener {
+public class ImagePickDialog extends BaseDialog implements PhotoListener {
     private final static String TAG = "ImagePickDialog";
     private CameraImageAction cameraImageAction;
     private LocalImageAction localImageAction;
@@ -38,9 +37,6 @@ public class ImagePickDialog extends BaseDialog<ImagePick> implements PhotoListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_image_pick);
-        mDataBinding.setCameraOnClickListener(new CameraOnClickImp());
-        mDataBinding.setPhoneOnClickListener(new PhotoOnCLickImp());
-        mDataBinding.setDismissOnClickListener(new DismissOnclickImp());
         cameraImageAction = new CameraImageAction(activity);
         cameraImageAction.setOnBitmapListener(this);
         localImageAction = new LocalImageAction(activity);
@@ -80,31 +76,20 @@ public class ImagePickDialog extends BaseDialog<ImagePick> implements PhotoListe
             onBitmapListener.onPhoto(bimType, bm);
     }
 
-    private class CameraOnClickImp implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            sel = 0;
-            dismiss();
-            cameraImageAction.startAction();
-        }
+    public void onTakeCameraOnClick(View v){
+        sel = 0;
+        dismiss();
+        cameraImageAction.startAction();
     }
 
-    private class PhotoOnCLickImp implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            sel = 1;
-            dismiss();
-            localImageAction.startAction();
-        }
+    public void onTakePhotoOnClick(View v) {
+        sel = 1;
+        dismiss();
+        localImageAction.startAction();
     }
 
-    private class DismissOnclickImp implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            dismiss();
-        }
+    public void onDismissOnClick(View v){
+        dismiss();
     }
+
 }

@@ -15,15 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hlibrary.R;
+import com.hlibrary.base.CommonHandler;
 import com.hlibrary.base.ITabUpdate;
 import com.hlibrary.base.activity.BaseActivity;
-import com.hlibrary.base.handler.ActivityHandler;
 
 public class BaseFragment<T extends ViewDataBinding> extends Fragment {
 
     private static final int CONTENT_ID = R.id.frmlyt_tab;
 
-    protected ActivityHandler mFragmentHandler;
+    protected CommonHandler mFragmentHandler;
     protected T mViewDataBind;
     protected Bundle savedState;
 
@@ -39,7 +39,7 @@ public class BaseFragment<T extends ViewDataBinding> extends Fragment {
     public final void onActivityCreated(Bundle savedInstanceState) {
         onLocalActivityCreated(savedInstanceState);
         super.onActivityCreated(savedInstanceState);
-
+        mFragmentHandler = CommonHandler.Companion.obtain(getActivity());
         if (!restoreStateFromArguments()) {
             // First Time, Initialize something here
             onFirstTimeLaunched();
@@ -61,7 +61,7 @@ public class BaseFragment<T extends ViewDataBinding> extends Fragment {
     }
 
     protected void onFirstTimeLaunched() {
-        mFragmentHandler = ActivityHandler.obtain(getActivity());
+
     }
 
     protected final View setContentView(@LayoutRes int layoutResID, @NonNull LayoutInflater inflater, @NonNull

@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hlibrary.R;
+import com.hlibrary.base.CommonHandler;
 import com.hlibrary.base.activity.BaseActivity;
-import com.hlibrary.base.handler.CommonHandler;
 
 /**
  * Created by linwenhui on 2015/10/1.
@@ -35,6 +35,7 @@ public class BaseDialogFragment<T extends ViewDataBinding> extends DialogFragmen
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mFragmentHandler = CommonHandler.Companion.obtain(getActivity().getApplicationContext());
         if (!restoreStateFromArguments()) {
             // First Time, Initialize something here
             onFirstTimeLaunched();
@@ -45,6 +46,7 @@ public class BaseDialogFragment<T extends ViewDataBinding> extends DialogFragmen
     @Override
     public void onDestroyView() {
         mFragmentHandler.release();
+        mFragmentHandler = null;
         super.onDestroyView();
     }
 
@@ -53,7 +55,7 @@ public class BaseDialogFragment<T extends ViewDataBinding> extends DialogFragmen
     }
 
     protected void onFirstTimeLaunched() {
-        mFragmentHandler = CommonHandler.obtain(getActivity().getApplicationContext());
+
     }
 
     protected View setContentView(int layoutResID, LayoutInflater inflater, ViewGroup container) {
@@ -67,17 +69,6 @@ public class BaseDialogFragment<T extends ViewDataBinding> extends DialogFragmen
         saveStateToArguments();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mFragmentHandler.register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mFragmentHandler.unregister(this);
-    }
 
     private static final String STATE_TAG = "STATE_TAG";
 

@@ -8,7 +8,7 @@ import android.os.Looper;
 import android.util.DisplayMetrics;
 
 import com.hlibrary.crashmanager.AppCrashHandler;
-import com.hlibrary.image.ImageUtil;
+import com.hlibrary.image.ImageManager;
 import com.hlibrary.util.Logger;
 import com.hlibrary.utils.ActivityManager;
 
@@ -34,7 +34,6 @@ public abstract class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
         init();
-        ImageUtil.initImageLoader(this);
         Logger.getInstance().setPackageName(this);
         Logger.getInstance().setDEBUG(isLogDebug(), isLogFileDebug());
     }
@@ -42,7 +41,6 @@ public abstract class AppContext extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        ImageUtil.clearMemory();
         activityManager.exit();
         System.exit(0);
     }
@@ -50,8 +48,7 @@ public abstract class AppContext extends Application {
     private void init() {
         instance = this;
         AppCrashHandler.getInstance();
-        ImageUtil.initImageLoader(instance);
-
+        ImageManager.Companion.getInstance(this).init();
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
