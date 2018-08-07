@@ -35,7 +35,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     public abstract int getLayoutRes();
 
     public int getStatusBarColorResId() {
-        return android.R.color.black;
+        return 0;
     }
 
     public void setStatusBarColorResId(@ColorRes int colorResId) {
@@ -80,7 +80,9 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         DensityUtil.setCustomDensity(this, getApplication(), staticPixels);
         mActivityHanler = CommonHandler.Companion.obtain(this);
         mActivityHanler.pushActivity(this);
-        setStatusBarColorResId(getStatusBarColorResId());
+        int statusBarColor = getStatusBarColorResId();
+        if (statusBarColor > 0)
+            setStatusBarColorResId(statusBarColor);
         if (useDataBinding()) {
             mViewDataBind = DataBindingUtil.setContentView(this, getLayoutRes());
         } else {
