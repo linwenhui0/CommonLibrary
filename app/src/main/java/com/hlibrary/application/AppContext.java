@@ -35,7 +35,8 @@ public abstract class AppContext extends Application {
         super.onCreate();
         init();
         Logger.getInstance().setPackageName(this);
-        Logger.getInstance().setDEBUG(isLogDebug(), isLogFileDebug());
+        Logger.getInstance().setDebug(isLogDebug());
+        Logger.getInstance().setFileDebug(isLogFileDebug());
     }
 
     @Override

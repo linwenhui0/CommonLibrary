@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.hlibrary.base.CommonHandler;
-import com.hlibrary.util.DensityUtil;
 import com.hlibrary.util.ToastUtil;
 
 import java.lang.reflect.Field;
@@ -77,12 +76,12 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
                 e.printStackTrace();
             }
         }
-        DensityUtil.setCustomDensity(this, getApplication(), staticPixels);
         mActivityHanler = CommonHandler.Companion.obtain(this);
         mActivityHanler.pushActivity(this);
         int statusBarColor = getStatusBarColorResId();
-        if (statusBarColor > 0)
+        if (statusBarColor > 0) {
             setStatusBarColorResId(statusBarColor);
+        }
         if (useDataBinding()) {
             mViewDataBind = DataBindingUtil.setContentView(this, getLayoutRes());
         } else {
@@ -106,19 +105,19 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     }
 
     public void showToast(@NonNull String text) {
-        ToastUtil.showLongTime(this, text);
+        ToastUtil.Companion.showLongTime(this, text);
     }
 
     public void showToast(@NonNull String text, @IntRange(from = 1) int duration) {
-        ToastUtil.showCustomTime(this, text, duration);
+        ToastUtil.Companion.showCustomTime(this, text, duration);
     }
 
     public void showToast(@StringRes int resId) {
-        ToastUtil.showLongTime(this, resId);
+        ToastUtil.Companion.showLongTime(this, resId);
     }
 
     public void showToast(@StringRes int resId, @IntRange(from = 1) int duration) {
-        ToastUtil.showCustomTime(this, resId, duration);
+        ToastUtil.Companion.showCustomTime(this, resId, duration);
     }
 
     public void showProgess(@NonNull String msg) {

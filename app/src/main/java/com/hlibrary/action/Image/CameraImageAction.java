@@ -9,8 +9,8 @@ import android.support.annotation.NonNull;
 
 import com.hlibrary.action.ImageAction;
 import com.hlibrary.util.BitmapDecoder;
-import com.hlibrary.util.SDUtil;
 import com.hlibrary.util.ToastUtil;
+import com.hlibrary.util.file.SdUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -33,9 +33,9 @@ public class CameraImageAction extends ImageAction {
 		cameraDir = new File(
 				android.os.Environment.getExternalStorageDirectory(),
 				"/Android/data/" + activity.getPackageName() + "/Camera");
-		if (SDUtil.ExistSDCard() && !cameraDir.exists()) {
+		if (SdUtil.existSDCard() && !cameraDir.exists()) {
 			if (!cameraDir.mkdirs()) {
-				ToastUtil.showShortTime(activity, "SD卡拔出，不能使用某些功能!");
+				ToastUtil.Companion.showShortTime(activity, "SD卡拔出，不能使用某些功能!");
 			}
 		}
 	}
