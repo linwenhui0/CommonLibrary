@@ -7,9 +7,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 
-import com.hlibrary.crashmanager.AppCrashHandler;
 import com.hlibrary.image.ImageManager;
 import com.hlibrary.util.Logger;
+import com.hlibrary.util.crash.AppCrashHandler;
 import com.hlibrary.utils.ActivityManager;
 
 import java.util.concurrent.ExecutorService;
