@@ -17,7 +17,7 @@ import android.widget.PopupWindow
  * @author linwenhui
  * @date 2015/11/9
  */
-class BasePopupWindow<T : ViewDataBinding?>(protected val activity: Activity) : PopupWindow(activity) {
+open class BasePopupWindow<T : ViewDataBinding?>(protected val activity: Activity) : PopupWindow(activity) {
 
     protected var mViewBinding: T? = null
 

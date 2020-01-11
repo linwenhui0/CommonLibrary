@@ -25,16 +25,18 @@ android {
 
 dependencies {
     //    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.core:core-ktx:1.1.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.j256.ormlite:ormlite-core:5.0'
-    implementation 'com.j256.ormlite:ormlite-android:5.0'
     //For Lifecycles, LiveData, and ViewModel
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "androidx.room:room-runtime:2.2.3"
+    annotationProcessor "androidx.room:room-compiler:2.2.3"
     //本地代码库
     implementation 'com.hlibrary.util:utillibrary:0.0.22'
+    implementation 'com.alibaba:fastjson:1.2.61'
     implementation 'com.hlibrary.image:imagelibrary:0.0.2'
     implementation 'com.hlibrary.adapter:adapterlibrary:0.0.4'
     implementation 'com.hlibrary.widget:widgetlibrary:0.0.6'

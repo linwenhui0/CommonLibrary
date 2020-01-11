@@ -43,7 +43,7 @@ open class BaseFragment<T : ViewDataBinding?> : Fragment() {
         return mViewDataBind?.root
     }
 
-    protected fun setupToolbar(toolbar: Toolbar?) {
+    protected fun setupToolbar(toolbar: Toolbar) {
         val baseActivity = activity as BaseActivity<*>?
         baseActivity?.setupToolbar(toolbar)
     }

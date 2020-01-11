@@ -12,17 +12,17 @@ import java.util.*
  * @version v1.0.0
  * @since 2015-01-27
 </T> */
-abstract class BaseFilter<T>(protected var mData: List<T>, private val mAdapter: BaseAdapter) : Filter() {
-    private var mFilterData: ArrayList<T>? = null
+abstract class BaseFilter(protected var mData: List<*>, private val mAdapter: BaseAdapter) : Filter() {
+    private var mFilterData: ArrayList<Any>? = null
     override fun performFiltering(prefix: CharSequence): FilterResults {
         val results = FilterResults()
         if (mFilterData == null) {
-            mFilterData = ArrayList(mData)
+            mFilterData = ArrayList<Any>(mData)
         }
-        if (prefix?.isNotEmpty() == true) {
-            val unfilteredValues: ArrayList<T> = mFilterData!!
+        if (prefix.isNotEmpty()) {
+            val unfilteredValues: ArrayList<Any> = mFilterData!!
             val count = unfilteredValues.size
-            val newValues = ArrayList<T>(count)
+            val newValues = ArrayList<Any>(count)
             for (i in 0 until count) {
                 val h = unfilteredValues[i]
                 val isInclude = isInclude(h, prefix)
@@ -34,7 +34,7 @@ abstract class BaseFilter<T>(protected var mData: List<T>, private val mAdapter:
             results.values = newValues
             results.count = newValues.size
         } else {
-            val list: ArrayList<T> = mFilterData!!
+            val list: ArrayList<Any> = mFilterData!!
             results.values = list
             results.count = list.size
         }
@@ -47,12 +47,19 @@ abstract class BaseFilter<T>(protected var mData: List<T>, private val mAdapter:
      * 过虑的关键字
      * @return 过滤条件
      */
-    abstract fun isInclude(model: T, prefix: CharSequence?): Boolean
+    abstract fun isInclude(model: Any, prefix: CharSequence?): Boolean
 
     override fun publishResults(constraint: CharSequence, results: FilterResults) {
-        mData = results.values as List<T>
-        if (results.count > 0) {
-            mAdapter.notifyDataSetChanged()
+        if (results.values is List<*> ) {
+            try {
+                mData = results.values as List<*>
+                if (results.count > 0) {
+                    mAdapter.notifyDataSetChanged()
+                } else {
+                    mAdapter.notifyDataSetInvalidated()
+                }
+            } catch (e: Exception) {
+            }
         } else {
             mAdapter.notifyDataSetInvalidated()
         }

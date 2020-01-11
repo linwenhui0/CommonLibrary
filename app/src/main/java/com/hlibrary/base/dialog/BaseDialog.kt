@@ -15,17 +15,14 @@ import com.hlibrary.R
 /**
  * @author linwenhui
  */
-abstract class BaseDialog<T : ViewDataBinding?> @JvmOverloads constructor(context: Context, @StyleRes theme: Int = R.style.DialogStyle) : Dialog(context, theme) {
-    private val inflater: LayoutInflater
-    private val parent: FrameLayout
+open class BaseDialog<T : ViewDataBinding?> constructor(context: Context, @StyleRes theme: Int = R.style.DialogStyle) : Dialog(context, theme) {
+
     protected var mDataBinding: T? = null
 
-    init {
-        inflater = LayoutInflater.from(context)
-        parent = FrameLayout(context)
-    }
 
-    override fun setContentView(@LayoutRes layoutResID: Int) {
+   override fun setContentView(@LayoutRes layoutResID: Int) {
+        val inflater = LayoutInflater.from(context)
+        val parent = FrameLayout(context)
         mDataBinding = DataBindingUtil.inflate<T>(inflater, layoutResID, parent, false)
         super.setContentView(mDataBinding!!.root)
     }
