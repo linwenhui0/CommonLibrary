@@ -1,10 +1,10 @@
 package com.hlibrary.utils
 
 import android.content.Context
-import android.support.annotation.StringRes
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.annotation.StringRes
 import com.hlibrary.R
 
 class ToastManager private constructor() {

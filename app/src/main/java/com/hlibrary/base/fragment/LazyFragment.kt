@@ -1,8 +1,8 @@
 package com.hlibrary.base.fragment
 
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.View
+import androidx.databinding.ViewDataBinding
 
 /**
  * 1、Viewpager + Fragment情况下，fragment的生命周期因Viewpager的缓存机制而失去了具体意义

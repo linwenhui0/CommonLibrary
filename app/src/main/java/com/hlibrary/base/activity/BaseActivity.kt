@@ -1,17 +1,17 @@
 package com.hlibrary.base.activity
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.StringRes
-import android.support.v4.content.ContextCompat
 import android.view.View
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.hlibrary.utils.ActivityManager
 import com.hlibrary.utils.ToastManager
 

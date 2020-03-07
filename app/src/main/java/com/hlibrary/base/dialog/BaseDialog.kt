@@ -2,14 +2,14 @@ package com.hlibrary.base.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.annotation.LayoutRes
-import android.support.annotation.StyleRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.hlibrary.R
 
 /**
