@@ -10,16 +10,12 @@ import com.hlibrary.util.crash.ICrashListener
 import com.hlibrary.utils.ActivityManager
 import kotlin.system.exitProcess
 
-abstract class AppContext : Application(), ICrashListener {
-    abstract val isLogDebug: Boolean
-    abstract val isLogFileDebug: Boolean
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+class AppContext : Application(), ICrashListener {
+
     override fun onCreate() {
         super.onCreate()
         init()
         Logger.instance.setPackageName(this)
-        Logger.instance.setDebug(isLogDebug)
-        Logger.instance.setFileDebug(isLogFileDebug)
     }
 
     override fun onTerminate() {
@@ -32,5 +28,9 @@ abstract class AppContext : Application(), ICrashListener {
         AppCrashHandler.instance.crashListener = this
         ImageManager.getInstance(this).init()
     }
+
+    override fun onCrashMessage(message: String) {
+    }
+
 
 }
