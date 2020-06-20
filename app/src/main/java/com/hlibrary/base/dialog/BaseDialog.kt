@@ -20,21 +20,37 @@ open class BaseDialog<T : ViewDataBinding?> constructor(context: Context, @Style
     protected var mDataBinding: T? = null
 
 
-   override fun setContentView(@LayoutRes layoutResID: Int) {
+    override fun setContentView(@LayoutRes layoutResID: Int) {
         val inflater = LayoutInflater.from(context)
         val parent = FrameLayout(context)
         mDataBinding = DataBindingUtil.inflate<T>(inflater, layoutResID, parent, false)
-        super.setContentView(mDataBinding!!.root)
+        val v = mDataBinding?.root
+        if (v != null) {
+            super.setContentView(v)
+        } else {
+            super.setContentView(layoutResID)
+        }
     }
 
     override fun setContentView(view: View) {
         mDataBinding = DataBindingUtil.bind<T>(view)
-        super.setContentView(mDataBinding!!.root)
+        val v = mDataBinding?.root
+        if (v != null) {
+            super.setContentView(v)
+        } else {
+            super.setContentView(view)
+        }
     }
 
-    override fun setContentView(view: View, params: ViewGroup.LayoutParams) {
+
+    override fun setContentView(view: View, params: ViewGroup.LayoutParams?) {
         mDataBinding = DataBindingUtil.bind<T>(view)
-        super.setContentView(mDataBinding!!.root, params)
+        val v = mDataBinding?.root
+        if (v != null) {
+            super.setContentView(v, params)
+        } else {
+            super.setContentView(view, params)
+        }
     }
 
     override fun show() {
