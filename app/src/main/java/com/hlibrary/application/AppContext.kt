@@ -10,7 +10,7 @@ import com.hlibrary.util.crash.ICrashListener
 import com.hlibrary.utils.ActivityManager
 import kotlin.system.exitProcess
 
-class AppContext : Application(), ICrashListener {
+open class AppContext : Application(), ICrashListener {
 
     override fun onCreate() {
         super.onCreate()
