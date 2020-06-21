@@ -19,12 +19,10 @@ class ToastManager private constructor() {
 
     @Synchronized
     fun createView(context: Context) {
-        if (toast == null) {
-            toast = Toast(context)
-            val v = LayoutInflater.from(context).inflate(R.layout.view_toast, null)
-            toast?.view = v
-            toast?.setGravity(Gravity.CENTER, 0, 0)
-        }
+        toast = Toast(context)
+        val v = LayoutInflater.from(context).inflate(R.layout.view_toast, null)
+        toast?.view = v
+        toast?.setGravity(Gravity.CENTER, 0, 0)
     }
 
     fun showLongToast(context: Context, text: String) {
