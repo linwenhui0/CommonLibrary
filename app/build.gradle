@@ -25,19 +25,16 @@ android {
 
 dependencies {
     //    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.core:core-ktx:1.3.0"
+    implementation "androidx.core:core-ktx:1.6.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //For Lifecycles, LiveData, and ViewModel
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.cardview:cardview:1.0.0'
     //本地代码库
     implementation 'com.alibaba:fastjson:1.2.61'
-    compileOnly 'com.github.linwenhui0:ImageLibrary:0.0.3'
-    compileOnly 'com.github.linwenhui0:AdapterLibrary:0.0.5'
-    compileOnly 'com.github.linwenhui0:WidgetLibrary:0.0.3'
-    compileOnly 'com.github.linwenhui0:UtilLibary:0.0.34'
+    compileOnly 'com.github.linwenhui0:UtilLibary:0.0.40'
 }
 
 //apply from: 'http://139.180.212.139/gradle/gradle-mvn-push.gradle'

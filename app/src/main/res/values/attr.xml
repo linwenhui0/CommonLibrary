@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ReceiveCodeButton">
+        <attr name="receive_text" format="string|reference" />
+        <attr name="edittext_id" format="reference" />
+        <attr name="default_text" format="string|reference" />
+        <attr name="code_interval" format="integer|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="FormatEditText">
+        <attr name="separator" format="string|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MarqueeTextView">
+        <attr name="time_interval" format="integer|reference" />
+        <attr name="auto_start" format="boolean|reference" />
+        <attr name="times" format="integer|reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="RecyclerView">
+        <attr name="firstViualBottom" format="boolean|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="HImageView">
+        <attr name="circle" format="boolean|reference"/>
+        <attr name="loadNetImage" format="string|reference"/>
+        <attr name="cornersRadius" format="float|reference"/>
+    </declare-styleable>
+
+</resources>
