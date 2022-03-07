@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.hlibrary.widget.R;
+import com.hlibrary.R;
+
 
 public class RecyclerView extends androidx.recyclerview.widget.RecyclerView {
 
