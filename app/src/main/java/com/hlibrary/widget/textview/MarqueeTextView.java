@@ -14,7 +14,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.hlibrary.widget.R;
+import com.hlibrary.R;
 
 /**
  * 跑马灯

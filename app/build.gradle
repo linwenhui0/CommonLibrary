@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
     }
     defaultConfig {
@@ -32,9 +32,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.facebook.fresco:fresco:2.1.0'
+    implementation 'com.facebook.fresco:animated-gif:2.1.0'
+    implementation 'com.facebook.fresco:animated-webp:2.1.0'//加载webp动图需添加此库
+    implementation 'com.facebook.fresco:webpsupport:2.1.0'//支持webp需添加此库
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:2.1.0'//网络实现层使用okhttp3需添加此库
+    implementation 'jp.wasabeef:fresco-processors:2.1.0'//用于提供fresco的各种图片变换
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
     //本地代码库
     implementation 'com.alibaba:fastjson:1.2.61'
-    compileOnly 'com.github.linwenhui0:UtilLibary:0.0.40'
+    compileOnly 'com.github.linwenhui0:UtilLibary:0.0.42'
 }
 
 //apply from: 'http://139.180.212.139/gradle/gradle-mvn-push.gradle'

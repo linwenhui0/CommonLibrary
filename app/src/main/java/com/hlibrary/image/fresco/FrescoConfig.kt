@@ -22,10 +22,10 @@ import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.imagepipeline.request.ImageRequestBuilder
-import com.hlibrary.image.R
+import com.hlibrary.R
 import com.hlibrary.image.fresco.controller.CalHeightController
 import com.hlibrary.image.view.HImageView
-import com.hlibrary.util.file.SdUtil.existSDCard
+import com.hlibrary.utils.file.SdUtil.existSDCard
 import jp.wasabeef.fresco.processors.CombinePostProcessors
 import jp.wasabeef.fresco.processors.GrayscalePostprocessor
 import java.io.File

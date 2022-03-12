@@ -12,8 +12,7 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.hlibrary.R;
-
-import java.util.logging.Logger;
+import com.hlibrary.utils.Logger;
 
 
 /**
@@ -117,7 +116,7 @@ public class FormatEditText extends AppCompatEditText
                 if ((sbLen == 4 || sbLen == 9) && !String.valueOf(sb.charAt(sbLen - 1)).equals(separator)) {
                     sb.insert(sb.length() - 1, separator);
                     moveNum = 1;
-                    Logger.Companion.i(TAG, "selectionStart = " + selectionStart + " === " + sb.charAt(selectionStart - 2) + "");
+                    Logger.INSTANCE.i(TAG, "selectionStart = " + selectionStart + " === " + sb.charAt(selectionStart - 2) + "");
                 }
             }
         }

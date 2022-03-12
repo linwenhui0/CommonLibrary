@@ -15,7 +15,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 
-import com.hlibrary.util.Logger;
+import com.hlibrary.R;
+import com.hlibrary.utils.Logger;
 
 
 public class ArcMenu extends ViewGroup implements OnClickListener {
@@ -107,8 +108,6 @@ public class ArcMenu extends ViewGroup implements OnClickListener {
         marginRight = a.getDimensionPixelSize(R.styleable.ArcMenu_marginRight, 0);
         mAngle = Math.PI * a.getInt(R.styleable.ArcMenu_angle, 1) / 2.0;
         controlIdIndex = a.getInteger(R.styleable.ArcMenu_controlIdIndex, 0);
-
-        Logger.Companion.getInstance().e("TAG", "position = " + mPosition + " , radius =  " + mRadius);
 
         a.recycle();
 

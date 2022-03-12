@@ -15,9 +15,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.hlibrary.util.Logger;
-import com.hlibrary.util.Utils;
-import com.hlibrary.widget.R;
+import com.hlibrary.R;
+import com.hlibrary.utils.Logger;
+import com.hlibrary.utils.RegexUtils;
 import com.hlibrary.widget.listener.IReceiverCodeListener;
 
 
@@ -91,7 +91,6 @@ public class ReceiveCodeButton extends AppCompatCheckBox implements CompoundButt
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void destory() {
-        Logger.Companion.getInstance().defaultTagD("destory");
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -157,14 +156,15 @@ public class ReceiveCodeButton extends AppCompatCheckBox implements CompoundButt
             if (phoneEdittext instanceof FormatEditText) {
                 FormatEditText formatEditText = (FormatEditText) phoneEdittext;
                 String separator = formatEditText.getSeparator();
-                isMobileNumber = Utils.INSTANCE.isFormatMobileNO(phoneNum, separator);
+                isMobileNumber =
+                        RegexUtils.INSTANCE.isFormatMobileNO(phoneNum, separator);
             } else {
-                isMobileNumber = Utils.INSTANCE.isMobileNO(phoneNum);
+                isMobileNumber = RegexUtils.INSTANCE.isMobileNO(phoneNum);
             }
-            Logger.Companion.getInstance().defaultTagD("isMobileNumber = ", isMobileNumber);
+            Logger.INSTANCE.defaultTagD("isMobileNumber = " + isMobileNumber);
             if (!isMobileNumber) {
                 if (receiverCodeListener != null) {
-                    receiverCodeListener.onPhoneNumberValib();
+                    receiverCodeListener.onPhoneNumberValid();
                 }
                 setChecked(false);
                 return;
@@ -175,7 +175,6 @@ public class ReceiveCodeButton extends AppCompatCheckBox implements CompoundButt
     }
 
     private void updateViewText(long millisUntilFinished) {
-        Logger.Companion.getInstance().defaultTagD(millisUntilFinished);
         if (receiveText == null) {
             setText(String.format("%ds", millisUntilFinished / 1000));
         } else {
@@ -200,11 +199,12 @@ public class ReceiveCodeButton extends AppCompatCheckBox implements CompoundButt
             public void onFinish() {
 
                 countDownTimer = null;
-                Logger.Companion.getInstance().defaultTagD("onFinish");
+                Logger.INSTANCE.defaultTagD("onFinish");
                 setText(defaultText);
                 setChecked(false);
-                if (receiverCodeListener != null){
-                    receiverCodeListener.onFinish();}
+                if (receiverCodeListener != null) {
+                    receiverCodeListener.onFinish();
+                }
             }
         };
         countDownTimer.start();

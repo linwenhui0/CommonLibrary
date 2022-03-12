@@ -15,6 +15,8 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.hlibrary.R;
+
 
 /**
  * Created by Administrator on 205//2.

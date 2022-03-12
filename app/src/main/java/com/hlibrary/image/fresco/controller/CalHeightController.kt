@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.imagepipeline.image.ImageInfo
 import com.hlibrary.image.view.HImageView
-import com.hlibrary.util.Logger
 
 class CalHeightController(view: HImageView) : BaseControllerListener<ImageInfo>() {
     var view: HImageView? = view

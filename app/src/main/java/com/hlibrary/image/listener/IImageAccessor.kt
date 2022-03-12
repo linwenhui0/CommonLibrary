@@ -1,7 +1,7 @@
 package com.hlibrary.image.listener
 
 import android.view.View
-import com.hlibrary.image.R
+import com.hlibrary.R
 import java.io.File
 
 interface IImageAccessor {

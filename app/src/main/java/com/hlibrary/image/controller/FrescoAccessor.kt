@@ -19,7 +19,7 @@ import com.hlibrary.image.fresco.ImageDownImp
 import com.hlibrary.image.listener.IImageAccessor
 import com.hlibrary.image.listener.IImageDownListener
 import com.hlibrary.image.view.HImageView
-import com.hlibrary.util.Logger
+import com.hlibrary.utils.Logger
 import java.io.File
 
 
@@ -98,8 +98,7 @@ class FrescoAccessor(private val context: Context) : IImageAccessor {
     }
 
     override fun load(url: String?, obj: Any, imageDownListener: IImageDownListener) {
-
-        Logger.instance.defaultTagD("url = $url")
+        Logger.defaultTagD("url = $url")
         val uri = Uri.parse(url)
         val imageRequest = ImageRequestBuilder.newBuilderWithSource(uri)
                 .setProgressiveRenderingEnabled(true).build()

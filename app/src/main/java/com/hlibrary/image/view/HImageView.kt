@@ -5,8 +5,8 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
+import com.hlibrary.R
 import com.hlibrary.image.ImageManager.Companion.getInstance
-import com.hlibrary.image.R
 
 /**
  * Created by linwenhui on 2016/10/26.
